@@ -99,14 +99,18 @@ public class Automat
 			// Entferne aktuelles Element da es im nächsten Schritt abgearbeitet wird
 			zustand = stack.pop();
 			// Hätten wir mehr/andere Übergänge müssten diese hier angepasst werden
-			if(ew.charAt(0) == '0')
-			{						
-				zustand.wechsel_null();										
-			}			
-			if(ew.charAt(0) == '1')
+			switch(ew.charAt(0))
 			{
-				zustand.wechsel_eins();				
-			}	
+				case '0':
+					zustand.wechsel_null(ew);
+					break;
+				case '1':
+					zustand.wechsel_eins(ew);
+					break;
+				default:
+					System.out.println("Falsches Eingabesymbol!");
+					System.exit(0);
+			}			
 			// Optionale Ausgabe um zu überprüfen was der Automat macht
 			System.out.println("--> " + stack.peek() + "\n");
 			// Um Rekursion zu verstehen muss man zuerst Rekursion verstehen
